@@ -74,7 +74,7 @@ export class HomePage {
     navigator.geolocation.getCurrentPosition(resp => {
         this.latitude = resp.coords.latitude;
         this.longitude = resp.coords.longitude;
-        console.log('About to update coordinates', this.latitude, this.longitude);
+        // console.log('About to update coordinates', this.latitude, this.longitude);
         firebase.firestore().collection('user').doc(this.user.key).update({
           coordinates: [this.latitude, this.longitude]
         });
@@ -141,7 +141,7 @@ export class HomePage {
   complete(order: Order) {
     let message = 'Confirma que entregou a encomenda?';
     if(order.paymentMethod === 'atm' || order.paymentMethod === 'tpa') {
-      message += '\n\n Esta encomenda deve ser cobrada por cartão multibanco ou no caso de não ter TPA deve informar o cliente que entraremos em contacto.';
+      message += '\n\nEsta encomenda deve ser cobrada por cartão multibanco ou no caso de não ter TPA deve informar o cliente que entraremos em contacto mais tarde.';
     }
     if(confirm(message)) {
       firebase
