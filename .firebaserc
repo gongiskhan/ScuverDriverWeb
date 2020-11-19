@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "eatmatic-143319": {
+      "hosting": {
+        "prod": [
+          "scuverdeliver"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "eatmatic-143319"
+  }
+}

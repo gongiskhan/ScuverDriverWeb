@@ -7,7 +7,7 @@ export const environment = {
   firebase: {
     apiKey: 'AIzaSyDPHcaVV6I0RnWqFnbv2BrfZi6dgb0LX5I',
     authDomain: 'eatmatic-143319.firebaseapp.com',
-    databaseURL: 'https://eatmatic-143319-8b6f2.firebaseio.com',
+    databaseURL: 'https://eatmatic-143319.firebaseio.com',
     projectId: 'eatmatic-143319',
     storageBucket: 'eatmatic-143319.appspot.com',
     messagingSenderId: '1088252386731',
