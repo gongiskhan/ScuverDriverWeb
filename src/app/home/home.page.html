@@ -1,20 +1,105 @@
-<ion-header [translucent]="true">
+<ion-header>
   <ion-toolbar>
-    <ion-title>
-      Blank
-    </ion-title>
+    <ion-title class="ion-text-center" size="large">Scuver Driver Web</ion-title>
   </ion-toolbar>
 </ion-header>
-
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
-
   <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
+    <p style="padding-left: 1em;">
+      <span style="font-size: 1.4em; color: #38925c">Encomendas para Entrega: {{preparedOrders}}</span><br/>
+      <span style="padding-left: 0.2em; font-size: 1em; color: #858a86">Pendentes ou Em Preparação: {{pendingOrders}}</span>
+    </p>
+    <div *ngFor="let order of orders">
+      <ion-card>
+        <ion-card-content>
+          <p>
+            <span class="label">Estado: </span>
+            <span style="font-size: 1.5em;"
+                  [class]="order.status === 'ready' || order.status === 'sent' ?
+                    'stateEnabled' : order.status === 'bringing' ? 'stateBringing' : 'stateDisabled'">
+              {{states[order.status || 'pending']}}
+            </span>
+          </p>
+          <p>
+            <span class="label">Hora Preferencial: </span>
+            <span class="value">
+              {{this.formatHours(order.deliveryDate)}}
+            </span>
+          </p>
+          <p class="finalP">
+            <span class="label">Referência: </span>
+            <span class="value">{{order.reference}}</span>
+          </p>
+          <p>
+            <span class="label">Restaurante: </span>
+            <span class="value">{{order.restaurantName}}</span>
+          </p>
+          <p class="finalP">
+            <span class="label">Morada Restaurante: </span><br/>
+            <span [class]="order.restaurantAddress.coordinates.latitude ? 'link': ''"
+                  (click)="order.restaurantAddress.coordinates.latitude && openMap(order.restaurantAddress.coordinates)">
+              {{(order.restaurantAddress.address || '') + ' '}}
+              {{(order.restaurantAddress.floor || '') + ' '}}
+              {{(order.restaurantAddress.doorNumber || '') + ' '}}
+              {{(order.restaurantAddress.postalCode || '') + ' '}}
+              {{order.restaurantAddress.local || ''}}
+            </span>
+          </p>
+          <p>
+            <span class="label">Cliente: </span>
+            <span class="value">{{order.userName}}</span>
+          </p>
+          <p>
+            <span class="label">Telefone: </span>
+            <span class="value">{{order.phoneNumber}}</span>
+          </p>
+          <p class="finalP">
+            <span class="label">Morada Cliente: </span><br/>
+            <span [class]="order.address.coordinates.latitude ? 'link': ''"
+                  (click)="order.address.coordinates.latitude && openMap(order.address.coordinates)">
+              {{(order.address.address || '') + ' '}}
+              {{(order.address.floor || '') + ' '}}
+              {{(order.address.doorNumber || '') + ' '}}
+              {{(order.address.postalCode || '') + ' '}}
+              {{order.address.local || ''}}
+            </span>
+          </p>
+          <p>
+            <span class="label">Notas: </span>
+            <span class="value">{{order.notes}}</span>
+          </p>
+          <p>
+            <span class="label">Artigos: </span>
+            <span class="value">
+              <span *ngFor="let o of order.items">
+                <br/>
+                {{o.quantity + ' ' + o.name}}
+              </span>
+            </span>
+          </p>
+          <p>
+            <span class="label">Total: </span>
+            <span class="value">{{order.total || (order.subTotal + 1.75) }}</span>
+          </p>
+          <p class="finalP">
+            <span class="label">Estado Pagamento: </span>
+            <span
+                [class]="order.paymentMethod === 'atm' || order.paymentMethod === 'tpa' ? 'atm' : 'paid'">
+              {{order.paymentMethod === 'atm' || order.paymentMethod === 'tpa' ? 'TPA' : 'PAGO'}}
+            </span>
+          </p>
+          <div>
+            <ion-button size="full" *ngIf="order.status === 'sent' || order.status === 'ready'"
+                    (click)="bringing(order)">
+                  Aceitar
+            </ion-button>
+            <ion-button size="full" *ngIf="order.status === 'bringing'"
+                        (click)="complete(order)">
+              Entregue
+            </ion-button>
+          </div>
+        </ion-card-content>
+      </ion-card>
+    </div>
   </div>
 </ion-content>
