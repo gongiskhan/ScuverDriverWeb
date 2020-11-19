@@ -10,8 +10,10 @@ import {environment} from "../../environments/environment";
 })
 export class LoginPage implements OnInit {
 
-  email = 'goncalo.p.gomes@hotmail.com';
-  password = 'tmp12345';
+  // email = 'goncalo.p.gomes@hotmail.com';
+  // password = 'tmp12345';
+  email = '';
+  password = '';
 
   constructor(private router: Router) { }
 
