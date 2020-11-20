@@ -50,7 +50,7 @@ export class HomePage {
       let authUser: any = localStorage.getItem('scuver_driver_user');
       if (authUser) {
         authUser = JSON.parse(authUser);
-        firebase.firestore().collection('user').where('email','==',  authUser.user.email).onSnapshot(u => {
+        firebase.firestore().collection('user').where('email','==',  authUser.user.email.toLowerCase().trim()).onSnapshot(u => {
           const fU = u.docs[0] && u.docs[0].data();
           console.log('fU', fU);
           if (fU) {

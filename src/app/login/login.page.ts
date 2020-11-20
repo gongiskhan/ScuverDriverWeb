@@ -32,7 +32,7 @@ export class LoginPage implements OnInit {
       .then(() => {
         firebase
           .auth()
-          .signInWithEmailAndPassword(this.email || ' ', this.password || ' ')
+          .signInWithEmailAndPassword((this.email && this.email.toLowerCase().trim()) || ' ', this.password || ' ')
           .then((authUser) => {
             console.log('authUser', authUser);
             localStorage.setItem('scuver_driver_user', JSON.stringify(authUser));
