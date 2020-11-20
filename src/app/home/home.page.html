@@ -53,7 +53,7 @@
             <span class="label">Telefone: </span>
             <span class="value">{{order.phoneNumber}}</span>
           </p>
-          <p class="finalP">
+          <p class="finalP" *ngIf="order.status === 'bringing'">
             <span class="label">Morada Cliente: </span><br/>
             <span [class]="order.address.coordinates.latitude ? 'link': ''"
                   (click)="order.address.coordinates.latitude && openMap(order.address.coordinates)">
