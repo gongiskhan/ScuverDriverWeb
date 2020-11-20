@@ -124,7 +124,7 @@ export class HomePage {
 
   bringing(order: Order) {
     if(this.orderWithinDistance(order)) {
-      if(order.sentToDelivery) {
+      // if(order.sentToDelivery) {
         if(confirm('Aceitar encomenda?')) {
           firebase
             .database()
@@ -132,9 +132,9 @@ export class HomePage {
             .update({status: 'bringing', driver: this.user.email});
           this.deliveringOrder = {...order, status: 'bringing'} as Order;
         }
-      } else {
-        alert('Ocorreu um erro ao tentar aceitar a encomenda. Por favor tente outra vez.');
-      }
+      // } else {
+      //   alert('Ocorreu um erro ao tentar aceitar a encomenda. Por favor tente outra vez.');
+      // }
     } else {
       alert(`Não está dentro do raio de entrega. Por favor verifique se a distância do restaurante é inferior a ${this.user.realDeliveryRadius || 3}km e nesse caso informe-nos por favor.`);
     }
