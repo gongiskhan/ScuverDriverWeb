@@ -125,11 +125,13 @@ export class HomePage {
   bringing(order: Order) {
     if(this.orderWithinDistance(order)) {
       if(order.sentToDelivery) {
-        firebase
-          .database()
-          .ref('/order/' + order.key)
-          .update({status: 'bringing', driver: this.user.email});
-        this.deliveringOrder = {...order, status: 'bringing'} as Order;
+        if(confirm('Aceitar encomenda?')) {
+          firebase
+            .database()
+            .ref('/order/' + order.key)
+            .update({status: 'bringing', driver: this.user.email});
+          this.deliveringOrder = {...order, status: 'bringing'} as Order;
+        }
       } else {
         alert('Ocorreu um erro ao tentar aceitar a encomenda. Por favor tente outra vez.');
       }
