@@ -65,7 +65,7 @@ export class HomePage {
           }
         });
       } else {
-        alert('Não tem o login feito.')
+        alert('Não tem o login feito.');
       }
     });
   }
