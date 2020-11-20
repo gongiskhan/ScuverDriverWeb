@@ -50,7 +50,7 @@ export class HomePage {
       let authUser: any = localStorage.getItem('scuver_driver_user');
       if (authUser) {
         authUser = JSON.parse(authUser);
-        firebase.firestore().collection('user').where('email','==',  authUser.user.email).onSnapshot(u => {
+        firebase.firestore().collection('user').where('email','==',  authUser.user.email.toLowerCase().trim()).onSnapshot(u => {
           const fU = u.docs[0] && u.docs[0].data();
           console.log('fU', fU);
           if (fU) {
@@ -65,7 +65,7 @@ export class HomePage {
           }
         });
       } else {
-        alert('Não tem o login feito.')
+        alert('Não tem o login feito.');
       }
     });
   }
@@ -124,7 +124,7 @@ export class HomePage {
 
   bringing(order: Order) {
     if(this.orderWithinDistance(order)) {
-      if(order.sentToDelivery) {
+      // if(order.sentToDelivery) {
         if(confirm('Aceitar encomenda?')) {
           firebase
             .database()
@@ -132,9 +132,9 @@ export class HomePage {
             .update({status: 'bringing', driver: this.user.email});
           this.deliveringOrder = {...order, status: 'bringing'} as Order;
         }
-      } else {
-        alert('Ocorreu um erro ao tentar aceitar a encomenda. Por favor tente outra vez.');
-      }
+      // } else {
+      //   alert('Ocorreu um erro ao tentar aceitar a encomenda. Por favor tente outra vez.');
+      // }
     } else {
       alert(`Não está dentro do raio de entrega. Por favor verifique se a distância do restaurante é inferior a ${this.user.realDeliveryRadius || 3}km e nesse caso informe-nos por favor.`);
     }
