@@ -45,49 +45,51 @@
               {{order.restaurantAddress.local || ''}}
             </span>
           </p>
-          <p>
-            <span class="label">Cliente: </span>
-            <span class="value">{{order.userName}}</span>
-          </p>
-          <p>
-            <span class="label">Telefone: </span>
-            <span class="value">{{order.phoneNumber}}</span>
-          </p>
-          <p class="finalP" *ngIf="order.status === 'bringing'">
-            <span class="label">Morada Cliente: </span><br/>
-            <span [class]="order.address.coordinates.latitude ? 'link': ''"
-                  (click)="order.address.coordinates.latitude && openMap(order.address.coordinates)">
+          <div *ngIf="order.status === 'bringing'">
+            <p>
+              <span class="label">Cliente: </span>
+              <span class="value">{{order.userName}}</span>
+            </p>
+            <p>
+              <span class="label">Telefone: </span>
+              <span class="value">{{order.phoneNumber}}</span>
+            </p>
+            <p class="finalP">
+              <span class="label">Morada Cliente: </span><br/>
+              <span [class]="order.address.coordinates.latitude ? 'link': ''"
+                    (click)="order.address.coordinates.latitude && openMap(order.address.coordinates)">
               {{(order.address.address || '') + ' '}}
-              {{(order.address.floor || '') + ' '}}
-              {{(order.address.doorNumber || '') + ' '}}
-              {{(order.address.postalCode || '') + ' '}}
-              {{order.address.local || ''}}
+                {{(order.address.floor || '') + ' '}}
+                {{(order.address.doorNumber || '') + ' '}}
+                {{(order.address.postalCode || '') + ' '}}
+                {{order.address.local || ''}}
             </span>
-          </p>
-          <p>
-            <span class="label">Notas: </span>
-            <span class="value">{{order.notes}}</span>
-          </p>
-          <p>
-            <span class="label">Artigos: </span>
-            <span class="value">
+            </p>
+            <p>
+              <span class="label">Notas: </span>
+              <span class="value">{{order.notes}}</span>
+            </p>
+            <p>
+              <span class="label">Artigos: </span>
+              <span class="value">
               <span *ngFor="let o of order.items">
                 <br/>
                 {{o.quantity + ' ' + o.name}}
               </span>
             </span>
-          </p>
-          <p>
-            <span class="label">Total: </span>
-            <span class="value">{{order.total || (order.subTotal + 1.75) }}</span>
-          </p>
-          <p class="finalP">
-            <span class="label">Estado Pagamento: </span>
-            <span
-                [class]="order.paymentMethod === 'atm' || order.paymentMethod === 'tpa' ? 'atm' : 'paid'">
+            </p>
+            <p>
+              <span class="label">Total: </span>
+              <span class="value">{{order.total || (order.subTotal + 1.75) }}</span>
+            </p>
+            <p class="finalP">
+              <span class="label">Estado Pagamento: </span>
+              <span
+                  [class]="order.paymentMethod === 'atm' || order.paymentMethod === 'tpa' ? 'atm' : 'paid'">
               {{order.paymentMethod === 'atm' || order.paymentMethod === 'tpa' ? 'TPA' : 'PAGO'}}
             </span>
-          </p>
+            </p>
+          </div>
           <div>
             <ion-button size="full" *ngIf="order.status === 'sent' || order.status === 'ready'"
                     (click)="bringing(order)">
