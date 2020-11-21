@@ -26,7 +26,7 @@
               {{this.formatHours(order.deliveryDate)}}
             </span>
           </p>
-          <p class="finalP">
+          <p class="finalP" *ngIf="order.status === 'bringing'">
             <span class="label">Referência: </span>
             <span class="value">{{order.reference}}</span>
           </p>
