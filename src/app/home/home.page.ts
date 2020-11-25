@@ -129,7 +129,7 @@ export class HomePage {
           firebase
             .database()
             .ref('/order/' + order.key)
-            .update({status: 'bringing', driver: this.user.email});
+            .update({status: 'bringing', driver: this.user.email, acceptedAt: new Date()});
           this.deliveringOrder = {...order, status: 'bringing'} as Order;
         }
       // } else {
@@ -149,7 +149,7 @@ export class HomePage {
       firebase
         .database()
         .ref('/order/' + order.key)
-        .update({status: 'delivered'});
+        .update({status: 'delivered', deliveredAt: new Date()});
       this.deliveringOrder = null;
     }
   }

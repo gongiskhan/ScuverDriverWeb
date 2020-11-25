@@ -1,4 +1,9 @@
 #!/usr/bin/env bash
+
+git add .
+git commit -m "dev"
+git push
+
 ionic build --prod
 firebase deploy --only hosting:prod --project eatmatic-143319
 
