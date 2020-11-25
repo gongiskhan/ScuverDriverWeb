@@ -86,7 +86,7 @@
               <span class="label">Estado Pagamento: </span>
               <span
                   [class]="order.paymentMethod === 'atm' || order.paymentMethod === 'tpa' ? 'atm' : 'paid'">
-              {{order.paymentMethod === 'atm' || order.paymentMethod === 'tpa' ? 'TPA' : 'PAGO'}}
+              {{!order.paymentMethod || order.paymentMethod === 'atm' || order.paymentMethod === 'tpa' ? 'TPA' : 'PAGO'}}
             </span>
             </p>
           </div>
