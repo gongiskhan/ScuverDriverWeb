@@ -19,6 +19,7 @@ export class Order {
   table: string;
   invoiceReference: string;
   deliveryReference: string;
+  deliveryFee: number;
   userFCMTokens = [];
   restaurantFCMTokens = [];
   restaurantName = '';
