@@ -59,8 +59,8 @@
               <span [class]="order.address.coordinates.latitude ? 'link': ''"
                     (click)="order.address.coordinates.latitude && openMap(order.address.coordinates)">
               {{(order.address.address || '') + ' '}}
-                {{(order.address.floor || '') + ' '}}
                 {{(order.address.doorNumber || '') + ' '}}
+                {{(order.address.floor || '') + ' '}}
                 {{(order.address.postalCode || '') + ' '}}
                 {{order.address.local || ''}}
             </span>
