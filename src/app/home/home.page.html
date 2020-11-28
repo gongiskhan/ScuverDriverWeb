@@ -80,7 +80,7 @@
             </p>
             <p>
               <span class="label">Total: </span>
-              <span class="value">{{order.total || (order.subTotal + (order.deliveryFee === 0 ? 0 : (!!order.deliveryFee ? order.deliveryFee: 1.75)) ) }}</span>
+              <span class="value">{{calculateCost(order)}}</span>
             </p>
             <p class="finalP">
               <span class="label">Estado Pagamento: </span>

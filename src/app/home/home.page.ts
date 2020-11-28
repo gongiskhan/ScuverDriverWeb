@@ -174,6 +174,14 @@ export class HomePage {
     }
   }
 
+  calculateCost(order) {
+    let cost = order.total || (order.subTotal + (order.deliveryFee === 0 ? 0 : (!!order.deliveryFee ? order.deliveryFee: 1.75)) );
+    if (order.promotion && !order.promotion.used) {
+      cost -= order.promotion.amount;
+    }
+    return cost;
+  }
+
   private haversineDistance(destLat, destLng) {
     const toRadian = angle => (Math.PI / 180) * angle;
     const distance = (a, b) => (Math.PI / 180) * (a - b);
