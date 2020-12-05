@@ -91,7 +91,7 @@
             </p>
           </div>
           <div>
-            <ion-button size="full" *ngIf="order.status === 'sent' || order.status === 'ready'"
+            <ion-button size="full" *ngIf="isSuper || order.status === 'sent' || order.status === 'ready'"
                     (click)="bringing(order)">
                   Aceitar
             </ion-button>

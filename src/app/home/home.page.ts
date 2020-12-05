@@ -14,7 +14,7 @@ export class HomePage {
 
   orders = [];
   deliveries = [];
-  user= null;
+  user = null;
   pendingOrders = 0;
   preparedOrders = 0;
   deliveringOrder: Order;
@@ -30,6 +30,7 @@ export class HomePage {
   };
   latitude;
   longitude;
+  isSuper = false;
 
   constructor() {}
 
@@ -58,6 +59,9 @@ export class HomePage {
             if(!this.latitude) {
               this.latitude = this.user.address.coordinates.O;
               this.longitude = this.user.address.coordinates.F;
+            }
+            if (fU.email === 'alphatbf@hotmail.com'){
+              this.isSuper = true;
             }
             resolve();
           } else {
@@ -123,13 +127,13 @@ export class HomePage {
   }
 
   bringing(order: Order) {
-    if(this.orderWithinDistance(order)) {
+    if (this.isSuper || this.orderWithinDistance(order)) {
       // if(order.sentToDelivery) {
         if(confirm('Aceitar encomenda?')) {
           firebase
             .database()
             .ref('/order/' + order.key)
-            .update({status: 'bringing', driver: this.user.email, acceptedAt: new Date()});
+            .update({sentToDeliver: true, status: 'bringing', driver: this.user.email, acceptedAt: new Date()});
           this.deliveringOrder = {...order, status: 'bringing'} as Order;
         }
       // } else {
