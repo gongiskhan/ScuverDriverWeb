@@ -60,7 +60,8 @@ export class HomePage {
               this.latitude = this.user.address.coordinates.O;
               this.longitude = this.user.address.coordinates.F;
             }
-            if (fU.email === 'alphatbf@hotmail.com' || fU.email === 'rui.mgrodrigues9@gmail.com'){
+            // if (fU.email === 'alphatbf@hotmail.com' || fU.email === 'rui.mgrodrigues9@gmail.com'){
+            if (fU.email === 'alphatbf@hotmail.com'){
               this.isSuper = true;
             }
             resolve();
