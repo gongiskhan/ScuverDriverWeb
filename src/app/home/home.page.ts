@@ -133,7 +133,7 @@ export class HomePage {
           firebase
             .database()
             .ref('/order/' + order.key)
-            .update({sentToDeliver: true, status: 'bringing', driver: this.user.email, acceptedAt: new Date()});
+            .update({sentToDelivery: true, status: 'bringing', driver: this.user.email, acceptedAt: new Date()});
           this.deliveringOrder = {...order, status: 'bringing'} as Order;
         }
       // } else {
